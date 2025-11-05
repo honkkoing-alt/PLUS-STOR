@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قائمة تطبيقات الشحن</title>
+    <title>قائمة التطبيقات</title>
     <link rel="stylesheet" href="styles.css"> </head>
 <body>
 
     <header>
-        <h1>🛒 قائمة تطبيقات شحن الرصيد</h1>
+        <h1>قائمة التطبيقات</h1>
     </header>
 
     <div class="app-list-container">
@@ -20,14 +20,14 @@
             <h2 id="modalAppName"></h2>
             <div class="app-details-form">
                 <img id="modalAppImage" src="" alt="صورة التطبيق" class="app-image-modal">
-                <label for="userId">مربع (إيدي المستخدم):</label>
+                <label for="userId">أيدي المستخدم</label>
                 <input type="text" id="userId" placeholder="أدخل ايدي المستخدم هنا" required>
                 
-                <label for="quantity">مربع (الكمية):</label>
+                <label for="quantity">الكمية</label>
                 <select id="quantity" required>
                     </select>
 
-                <p class="price-display">السعر: <span id="currentPrice">0</span> $</p>
+                <p class="price-display">السعر<span id="currentPrice">0</span> $</p>
                 
                 <button id="buyButton" onclick="completePurchase()">شراء / إتمام الطلب</button>
             </div>
