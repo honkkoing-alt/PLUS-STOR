@@ -1,7 +1,7 @@
 // 1. قائمة التطبيقات ومعلومات الشحن
 const appsData = [
-    { name: "كوكو لايف", id: "koko", img: "https://example.com/koko.png", prices: { "500 كوينز": 5, "1000 كوينز": 9, "2500 كوينز": 20 } },
-    { name: "اوهلا شات", id: "ohla", img: "https://example.com/ohla.png", prices: { "100 ماسة": 2, "500 ماسة": 8, "1000 ماسة": 15 } },
+    { name: "كوكو لايف", id: "koko", img: "https://k.top4top.io/p_3596y2rxh9.jpg", prices: { "500 كوينز": 5, "1000 كوينز": 9, "2500 كوينز": 20 } },
+    { name: "اوهلا شات", id: "ohla", img: "https://j.top4top.io/p_3596of7008.jpg", prices: { "100 ماسة": 2, "500 ماسة": 8, "1000 ماسة": 15 } },
     { name: "وناسة", id: "wanasa", img: "https://example.com/wanasa.png", prices: { "500 نقطة": 7, "1500 نقطة": 20, "3000 نقطة": 35 } },
     { name: "هلا شات", id: "hala", img: "https://example.com/hala.png", prices: { "300 كوينز": 4, "900 كوينز": 10, "2000 كوينز": 22 } },
     { name: "مرحبا شات", id: "marhaba", img: "https://example.com/marhaba.png", prices: { "100 عملة": 3, "600 عملة": 15, "1200 عملة": 28 } },
