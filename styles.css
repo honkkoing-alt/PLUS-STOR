@@ -171,3 +171,51 @@ body {
     display: block;
     margin: 10px auto 20px;
 }
+
+/* ------------------ تصميم نافذة الإشعارات المخصصة (Custom Alert) ------------------ */
+
+.custom-alert-modal {
+    display: none; 
+    position: fixed;
+    z-index: 20; /* أعلى من المودال الأساسي */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    padding-top: 15%;
+}
+
+.custom-alert-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 350px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    border: 3px solid #ff0000; /* إطار أحمر تحذيري */
+}
+
+#customAlertMessage {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #ff0000; /* لون أحمر للرسالة */
+    margin-bottom: 20px;
+}
+
+#customAlertCloseButton {
+    background-color: #ff0000; /* أحمر */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+#customAlertCloseButton:hover {
+    background-color: #cc0000;
+}
