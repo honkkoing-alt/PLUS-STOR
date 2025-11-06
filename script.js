@@ -22,6 +22,32 @@ const quantityInput = document.getElementById('quantity');
 const priceDisplay = document.getElementById('currentPrice');
 let currentApp = null; 
 
+// 💡 متغيرات وأزرار الإشعار المخصص
+const customAlert = document.getElementById('customAlert');
+const customAlertMessage = document.getElementById('customAlertMessage');
+const customAlertCloseButton = document.getElementById('customAlertCloseButton');
+
+// 💡 دالة لإظهار الإشعار المخصص بدلاً من alert()
+function showCustomAlert(message) {
+    customAlertMessage.innerHTML = message;
+    customAlert.style.display = 'block';
+}
+
+customAlertCloseButton.onclick = function() {
+    customAlert.style.display = 'none';
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+    // 💡 إغلاق الإشعار المخصص عند الضغط خارج حدوده
+    if (event.target == customAlert) {
+        customAlert.style.display = 'none';
+    }
+}
+
+
 // 2. إنشاء بطاقات التطبيقات في HTML
 appsData.forEach(app => {
     const card = document.createElement('div');
@@ -74,18 +100,7 @@ function updatePriceDisplay() {
     priceDisplay.textContent = '0';
 }
 
-// 5. إغلاق النافذة
-closeButton.onclick = function() {
-    modal.style.display = 'none';
-}
-
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = 'none';
-    }
-}
-
-// 6. وظيفة إتمام الطلب (مع فحص الحد الأدنى ورسالة التحذير)
+// 6. وظيفة إتمام الطلب (مع فحص الحد الأدنى ورسالة التحذير المخصصة)
 function completePurchase() {
     const userId = document.getElementById('userId').value;
     const quantityText = document.getElementById('quantity').value;
@@ -94,18 +109,18 @@ function completePurchase() {
     const minQ = currentApp.minQuantity;
 
     if (!userId) {
-        alert("الرجاء إدخال إيدي المستخدم.");
+        showCustomAlert("الرجاء إدخال إيدي المستخدم.");
         return;
     }
 
     if (isNaN(quantityValue) || quantityValue < minQ) {
-        alert(`الرجاء إدخال كمية صحيحة، الحد الأدنى هو ${minQ} ${currentApp.unitName}.`);
+        showCustomAlert(`الرجاء إدخال كمية صحيحة، الحد الأدنى هو ${minQ} ${currentApp.unitName}.`);
         return;
     }
     
     // رسالة التحذير المطلوبة (محاكاة فشل عملية الدفع)
-    alert("❌ رصيدك غير كاف لإتمام هذه العملية! 🔴");
+    showCustomAlert("❌ رصيدك غير كاف لإتمام هذه العملية! 🔴");
     
-    // إغلاق النافذة بعد رسالة التحذير
+    // إغلاق النافذة الأساسية بعد محاولة الطلب الفاشلة
     modal.style.display = 'none'; 
 }
