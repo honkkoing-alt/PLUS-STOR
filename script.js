@@ -1,6 +1,6 @@
 // 1. قائمة التطبيقات ومعلومات الشحن
 const appsData = [
-    { name: "كوكو لايف", id: "koko", img: "https://example.com/koko.png", prices: { "10000 كوينز": 10, "100000 كوينز": 5, "50000 كوينز": 1 } },
+    { name: "كوكو لايف", id: "koko", img: "https://example.com/koko.png", prices: { "10000 كوينز": 10, "0.10 كوينز": 5, "50000 كوينز": 1 } },
     { name: "اوهلا شات", id: "ohla", img: "https://example.com/ohla.png", prices: { "100 ماسة": 2, "500 ماسة": 8, "1000 ماسة": 15 } },
     { name: "وناسة", id: "wanasa", img: "https://example.com/wanasa.png", prices: { "500 نقطة": 7, "1500 نقطة": 20, "3000 نقطة": 35 } },
     { name: "هلا شات", id: "hala", img: "https://example.com/hala.png", prices: { "300 كوينز": 4, "900 كوينز": 10, "2000 كوينز": 22 } },
