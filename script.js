@@ -1,7 +1,7 @@
 // 1. قائمة التطبيقات ومعلومات الشحن
 // ملاحظة: "pricePer1000" هو سعر كل 1000 وحدة من عملة التطبيق.
 const appsData = [
-    { name: "كوكو لايف", id: "koko", img: "https://example.com/koko.png", unitName: "كوينز", pricePer1000: 9, minQuantity: 100 },
+    { name: "كوكو لايف", id: "koko", img: "https://example.com/koko.png", unitName: "كوينز", pricePer1000: 0.10, minQuantity: 10000 },
     { name: "اوهلا شات", id: "ohla", img: "https://example.com/ohla.png", unitName: "ماسة", pricePer1000: 15, minQuantity: 50 },
     { name: "وناسة", id: "wanasa", img: "https://example.com/wanasa.png", unitName: "نقطة", pricePer1000: 20, minQuantity: 500 },
     { name: "هلا شات", id: "hala", img: "https://example.com/hala.png", unitName: "كوينز", pricePer1000: 10, minQuantity: 300 },
