@@ -12,7 +12,6 @@ body {
     text-align: right; /* دعم اللغة العربية */
 }
 
-/* تصميم قائمة التطبيقات وتقسيم الشاشة - تم تثبيت التقسيم لصفين (عمودين) دائماً */
 .app-list-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
@@ -21,7 +20,6 @@ body {
     margin: 0 auto;
 }
 
-/* تصميم بطاقة التطبيق */
 .app-card {
     background-color: #fff;
     border-radius: 12px;
@@ -39,26 +37,21 @@ body {
 
 .app-card img {
     width: 100%;
-    height: 150px; /* يمكنك تعديل ارتفاع الصورة */
+    height: 150px; 
     object-fit: cover;
     display: block;
 }
 
-/* مربع اسم التطبيق النابض والمتدرج */
 .app-name-box {
     padding: 15px 10px;
     color: white;
     font-weight: bold;
     font-size: 1.1em;
-    /* التدرج اللوني */
     background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
     background-size: 200% 200%;
-    
-    /* تحريك النبض والتدرج للتطبيق */
     animation: gradient-pulse 4s ease infinite;
 }
 
-/* تعريف تحريك التدرج والنبض للتطبيق */
 @keyframes gradient-pulse {
     0% { background-position: 0% 50%; box-shadow: 0 0 5px rgba(255, 0, 0, 0.7); }
     50% { background-position: 100% 50%; box-shadow: 0 0 20px rgba(0, 0, 255, 0.9); }
@@ -99,13 +92,6 @@ body {
     font-weight: bold;
 }
 
-.close-button:hover,
-.close-button:focus {
-    color: #333;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 .app-details-form label {
     display: block;
     margin-bottom: 5px;
@@ -125,18 +111,15 @@ body {
 .price-display {
     font-size: 1.2em;
     font-weight: bold;
-    color: #4CAF50; /* لون أخضر للسعر */
+    color: #4CAF50; 
     margin-bottom: 20px;
     text-align: center;
 }
 
-/* تنسيق زر الشراء النابض والمتدرج */
 #buyButton {
-    /* تدرج لوني من الأحمر إلى الأزرق */
     background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); 
     background-size: 200% 200%;
-    animation: button-pulse 4s ease infinite; /* تطبيق النبض */
-
+    animation: button-pulse 4s ease infinite; 
     color: white;
     padding: 15px 20px;
     border: none;
@@ -148,7 +131,6 @@ body {
     font-weight: bold; 
 }
 
-/* تحريك زر الشراء */
 @keyframes button-pulse {
     0% { background-position: 0% 50%; box-shadow: 0 0 10px rgba(255, 0, 0, 0.7); }
     50% { background-position: 100% 50%; box-shadow: 0 0 20px rgba(0, 0, 255, 0.9); }
@@ -177,7 +159,7 @@ body {
 .custom-alert-modal {
     display: none; 
     position: fixed;
-    z-index: 20; /* أعلى من المودال الأساسي */
+    z-index: 20; 
     left: 0;
     top: 0;
     width: 100%;
@@ -195,18 +177,18 @@ body {
     max-width: 350px;
     text-align: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    border: 3px solid #ff0000; /* إطار أحمر تحذيري */
+    border: 3px solid #ff0000; 
 }
 
 #customAlertMessage {
     font-size: 1.1em;
     font-weight: bold;
-    color: #ff0000; /* لون أحمر للرسالة */
+    color: #ff0000; 
     margin-bottom: 20px;
 }
 
 #customAlertCloseButton {
-    background-color: #ff0000; /* أحمر */
+    background-color: #ff0000; 
     color: white;
     padding: 10px 20px;
     border: none;
