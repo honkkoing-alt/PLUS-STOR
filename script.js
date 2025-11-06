@@ -100,6 +100,11 @@ function updatePriceDisplay() {
     priceDisplay.textContent = '0';
 }
 
+// 5. إغلاق النافذة
+closeButton.onclick = function() {
+    modal.style.display = 'none';
+}
+
 // 6. وظيفة إتمام الطلب (مع فحص الحد الأدنى ورسالة التحذير المخصصة)
 function completePurchase() {
     const userId = document.getElementById('userId').value;
