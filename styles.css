@@ -12,10 +12,9 @@ body {
     text-align: right; /* دعم اللغة العربية */
 }
 
-/* تصميم قائمة التطبيقات وتقسيم الشاشة */
+/* تصميم قائمة التطبيقات وتقسيم الشاشة - تم تثبيت التقسيم لصفين (عمودين) دائماً */
 .app-list-container {
     display: grid;
-    /* هذا يفرض تقسيم الشاشة إلى عمودين متساويين (2fr) دائماً */
     grid-template-columns: repeat(2, 1fr); 
     gap: 20px;
     max-width: 1200px;
@@ -114,8 +113,7 @@ body {
     font-weight: bold;
 }
 
-.app-details-form input[type="text"],
-.app-details-form select {
+.app-details-form input[type="text"] { /* تم إلغاء select من هنا */
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
