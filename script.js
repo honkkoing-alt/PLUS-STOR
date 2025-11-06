@@ -1,7 +1,7 @@
 // 1. قائمة التطبيقات ومعلومات الشحن
 const appsData = [
-    { name: "كوكو لايف", id: "koko", img: "https://k.top4top.io/p_3596y2rxh9.jpg", prices: { "500 كوينز": 5, "1000 كوينز": 9, "2500 كوينز": 20 } },
-    { name: "اوهلا شات", id: "ohla", img: "https://j.top4top.io/p_3596of7008.jpg", prices: { "100 ماسة": 2, "500 ماسة": 8, "1000 ماسة": 15 } },
+    { name: "كوكو لايف", id: "koko", img: "https://example.com/koko.png", prices: { "500 كوينز": 5, "1000 كوينز": 9, "2500 كوينز": 20 } },
+    { name: "اوهلا شات", id: "ohla", img: "https://example.com/ohla.png", prices: { "100 ماسة": 2, "500 ماسة": 8, "1000 ماسة": 15 } },
     { name: "وناسة", id: "wanasa", img: "https://example.com/wanasa.png", prices: { "500 نقطة": 7, "1500 نقطة": 20, "3000 نقطة": 35 } },
     { name: "هلا شات", id: "hala", img: "https://example.com/hala.png", prices: { "300 كوينز": 4, "900 كوينز": 10, "2000 كوينز": 22 } },
     { name: "مرحبا شات", id: "marhaba", img: "https://example.com/marhaba.png", prices: { "100 عملة": 3, "600 عملة": 15, "1200 عملة": 28 } },
@@ -14,12 +14,10 @@ const appsData = [
     // يمكنك إضافة المزيد هنا
 ];
 
-// ملاحظة: روابط الصور (img: "https://example.com/...") يجب استبدالها بروابط صور التطبيقات الحقيقية الخاصة بك.
-
 const container = document.querySelector('.app-list-container');
 const modal = document.getElementById('purchaseModal');
 const closeButton = document.querySelector('.close-button');
-const quantitySelect = document.getElementById('quantity');
+const quantityInput = document.getElementById('quantity');
 const priceDisplay = document.getElementById('currentPrice');
 let currentApp = null; // لتخزين بيانات التطبيق الحالي
 
@@ -44,29 +42,31 @@ function openPurchaseModal(app) {
     document.getElementById('modalAppName').textContent = app.name;
     document.getElementById('modalAppImage').src = app.img;
     document.getElementById('userId').value = ''; // مسح حقل الإيدي
-    
-    // تعبئة خيارات الكمية
-    quantitySelect.innerHTML = '<option value="" disabled selected>اختر الكمية</option>';
-    for (const quantity in app.prices) {
-        const option = document.createElement('option');
-        // القيمة (value) ستكون السعر، والنص المرئي هو الكمية
-        option.value = app.prices[quantity]; 
-        option.textContent = `${quantity} (السعر: ${app.prices[quantity]}$)`;
-        quantitySelect.appendChild(option);
-    }
+    document.getElementById('quantity').value = ''; // مسح حقل الكمية
 
-    // تحديث السعر عند اختيار كمية
-    quantitySelect.onchange = updatePriceDisplay;
+    // ربط حقل الكمية النصي بتحديث السعر فوراً عند الكتابة
+    document.getElementById('quantity').oninput = updatePriceDisplay;
     
     // إعادة تعيين السعر الأولي
     priceDisplay.textContent = '0'; 
     modal.style.display = 'block';
 }
 
-// 4. تحديث عرض السعر
+// 4. تحديث عرض السعر بناءً على النص المدخل
 function updatePriceDisplay() {
-    const selectedPrice = quantitySelect.value;
-    priceDisplay.textContent = selectedPrice || '0';
+    const quantityText = document.getElementById('quantity').value.trim();
+    let price = '0';
+    
+    // البحث عن الكمية المدخلة (يجب أن تتطابق تماماً مع مفاتيح الأسعار في appsData)
+    if (currentApp && quantityText) {
+        if (currentApp.prices.hasOwnProperty(quantityText)) {
+            price = currentApp.prices[quantityText];
+        } else {
+             // إذا لم يحدث تطابق (مثل "1000" بدلاً من "1000 كوينز")، يبقى السعر صفر
+        }
+    }
+    
+    priceDisplay.textContent = price;
 }
 
 // 5. إغلاق النافذة
@@ -80,24 +80,27 @@ window.onclick = function(event) {
     }
 }
 
-// 6. وظيفة إتمام الطلب (يمكنك تعديلها لإرسال الطلب فعلياً)
+// 6. وظيفة إتمام الطلب
 function completePurchase() {
     const userId = document.getElementById('userId').value;
-    const quantityOption = quantitySelect.options[quantitySelect.selectedIndex];
-    const price = quantityOption ? quantityOption.value : '0';
-    const quantityName = quantityOption ? quantityOption.textContent.split(' (')[0] : 'غير محدد';
+    const quantityText = document.getElementById('quantity').value.trim(); // النص المدخل
+    
+    let price = '0';
+    if (currentApp && currentApp.prices.hasOwnProperty(quantityText)) {
+        price = currentApp.prices[quantityText];
+    }
 
-    if (!userId || price === '0') {
-        alert("الرجاء إدخال إيدي المستخدم واختيار الكمية.");
+    if (!userId || price === '0' || !quantityText) {
+        alert("الرجاء إدخال إيدي المستخدم والكمية بشكل صحيح لتحديد السعر. تأكد من كتابة الكمية مع الوحدة (مثال: 1000 كوينز).");
         return;
     }
 
-    // هنا يمكنك إضافة كود إرسال بيانات الشراء إلى خادمك أو نظام الدفع.
+    // هنا يمكنك إضافة كود إرسال بيانات الشراء
     const message = `
         تم طلب الشحن بنجاح!
         التطبيق: ${currentApp.name}
         إيدي المستخدم: ${userId}
-        الكمية: ${quantityName}
+        الكمية: ${quantityText}
         السعر الإجمالي: ${price}$
     `;
 
