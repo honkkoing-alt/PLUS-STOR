@@ -1,7 +1,7 @@
-// 1. قائمة التطبيقات ومعلومات الشحن
-// ملاحظة: "pricePer1000" هو سعر كل 1000 وحدة من عملة التطبيق.
+// 1. قائمة التطبيقات ومعلومات الشحن (لوحة التحكم بالأسعار والكميات الأدنى)
 const appsData = [
-    { name: "كوكو لايف", id: "koko", img: "https://example.com/koko.png", unitName: "كوينز", pricePer1000: 0.10, minQuantity: 10000 },
+    // [pricePer1000] هو سعر كل 1000 وحدة. [minQuantity] هو أقل كمية مسموح بها.
+    { name: "كوكو لايف", id: "koko", img: "https://example.com/koko.png", unitName: "كوينز", pricePer1000: 9, minQuantity: 100 },
     { name: "اوهلا شات", id: "ohla", img: "https://example.com/ohla.png", unitName: "ماسة", pricePer1000: 15, minQuantity: 50 },
     { name: "وناسة", id: "wanasa", img: "https://example.com/wanasa.png", unitName: "نقطة", pricePer1000: 20, minQuantity: 500 },
     { name: "هلا شات", id: "hala", img: "https://example.com/hala.png", unitName: "كوينز", pricePer1000: 10, minQuantity: 300 },
@@ -45,7 +45,7 @@ function openPurchaseModal(app) {
     document.getElementById('userId').value = ''; 
     document.getElementById('quantity').value = ''; 
     
-    // تغيير placeholder الكمية ليوضح الوحدة
+    // تغيير placeholder الكمية ليوضح الوحدة والحد الأدنى
     document.getElementById('quantity').placeholder = `أدخل الكمية المطلوبة (${app.unitName}، الحد الأدنى: ${app.minQuantity})`;
 
     // ربط حقل الكمية النصي بتحديث السعر فوراً عند الكتابة
@@ -85,7 +85,7 @@ window.onclick = function(event) {
     }
 }
 
-// 6. وظيفة إتمام الطلب (مع فحص الحد الأدنى)
+// 6. وظيفة إتمام الطلب (مع فحص الحد الأدنى ورسالة التحذير)
 function completePurchase() {
     const userId = document.getElementById('userId').value;
     const quantityText = document.getElementById('quantity').value;
@@ -103,18 +103,9 @@ function completePurchase() {
         return;
     }
     
-    // إعادة حساب السعر النهائي للتأكد
-    const finalPrice = ((quantityValue / 1000) * currentApp.pricePer1000).toFixed(2);
-
-    // هنا يمكنك إضافة كود إرسال بيانات الشراء
-    const message = `
-        تم طلب الشحن بنجاح!
-        التطبيق: ${currentApp.name}
-        إيدي المستخدم: ${userId}
-        الكمية: ${quantityValue} ${currentApp.unitName}
-        السعر الإجمالي: ${finalPrice}$
-    `;
-
-    alert(message); 
+    // رسالة التحذير المطلوبة (محاكاة فشل عملية الدفع)
+    alert("❌ رصيدك غير كاف لإتمام هذه العملية! 🔴");
+    
+    // إغلاق النافذة بعد رسالة التحذير
     modal.style.display = 'none'; 
 }
