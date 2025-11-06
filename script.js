@@ -1,16 +1,17 @@
 // 1. قائمة التطبيقات ومعلومات الشحن
+// ملاحظة: "pricePer1000" هو سعر كل 1000 وحدة من عملة التطبيق.
 const appsData = [
-    { name: "كوكو لايف", id: "koko", img: "https://example.com/koko.png", prices: { "10000 كوينز": 10, "0.10 كوينز": 5, "50000 كوينز": 1 } },
-    { name: "اوهلا شات", id: "ohla", img: "https://example.com/ohla.png", prices: { "100 ماسة": 2, "500 ماسة": 8, "1000 ماسة": 15 } },
-    { name: "وناسة", id: "wanasa", img: "https://example.com/wanasa.png", prices: { "500 نقطة": 7, "1500 نقطة": 20, "3000 نقطة": 35 } },
-    { name: "هلا شات", id: "hala", img: "https://example.com/hala.png", prices: { "300 كوينز": 4, "900 كوينز": 10, "2000 كوينز": 22 } },
-    { name: "مرحبا شات", id: "marhaba", img: "https://example.com/marhaba.png", prices: { "100 عملة": 3, "600 عملة": 15, "1200 عملة": 28 } },
-    { name: "سول شيل", id: "soulchill", img: "https://example.com/soulchill.png", prices: { "500 رصيد": 6, "1000 رصيد": 11, "2000 رصيد": 21 } },
-    { name: "سول يو", id: "soulyou", img: "https://example.com/soulyou.png", prices: { "50 ماسة": 1, "300 ماسة": 5, "1000 ماسة": 16 } },
-    { name: "تاكا تاكا", id: "takataka", img: "https://example.com/takataka.png", prices: { "1000 نقطة": 12, "5000 نقطة": 55 } },
-    { name: "بارتي ستار", id: "partystar", img: "https://example.com/partystar.png", prices: { "500 قطعة": 8, "1000 قطعة": 15 } },
-    { name: "بيغو لايف", id: "bigo", img: "https://example.com/bigo.png", prices: { "420 ماسة": 10, "850 ماسة": 20, "2125 ماسة": 49 } },
-    { name: "ليجو لايف", id: "lego", img: "https://example.com/lego.png", prices: { "1000 كوينز": 15, "5000 كوينز": 70 } }
+    { name: "كوكو لايف", id: "koko", img: "https://example.com/koko.png", unitName: "كوينز", pricePer1000: 9, minQuantity: 100 },
+    { name: "اوهلا شات", id: "ohla", img: "https://example.com/ohla.png", unitName: "ماسة", pricePer1000: 15, minQuantity: 50 },
+    { name: "وناسة", id: "wanasa", img: "https://example.com/wanasa.png", unitName: "نقطة", pricePer1000: 20, minQuantity: 500 },
+    { name: "هلا شات", id: "hala", img: "https://example.com/hala.png", unitName: "كوينز", pricePer1000: 10, minQuantity: 300 },
+    { name: "مرحبا شات", id: "marhaba", img: "https://example.com/marhaba.png", unitName: "عملة", pricePer1000: 25, minQuantity: 100 },
+    { name: "سول شيل", id: "soulchill", img: "https://example.com/soulchill.png", unitName: "رصيد", pricePer1000: 11, minQuantity: 100 },
+    { name: "سول يو", id: "soulyou", img: "https://example.com/soulyou.png", unitName: "ماسة", pricePer1000: 16, minQuantity: 50 },
+    { name: "تاكا تاكا", id: "takataka", img: "https://example.com/takataka.png", unitName: "نقطة", pricePer1000: 12, minQuantity: 1000 },
+    { name: "بارتي ستار", id: "partystar", img: "https://example.com/partystar.png", unitName: "قطعة", pricePer1000: 15, minQuantity: 500 },
+    { name: "بيغو لايف", id: "bigo", img: "https://example.com/bigo.png", unitName: "ماسة", pricePer1000: 23.8, minQuantity: 420 },
+    { name: "ليجو لايف", id: "lego", img: "https://example.com/lego.png", unitName: "كوينز", pricePer1000: 15, minQuantity: 1000 }
     // يمكنك إضافة المزيد هنا
 ];
 
@@ -19,7 +20,7 @@ const modal = document.getElementById('purchaseModal');
 const closeButton = document.querySelector('.close-button');
 const quantityInput = document.getElementById('quantity');
 const priceDisplay = document.getElementById('currentPrice');
-let currentApp = null; // لتخزين بيانات التطبيق الحالي
+let currentApp = null; 
 
 // 2. إنشاء بطاقات التطبيقات في HTML
 appsData.forEach(app => {
@@ -41,32 +42,36 @@ function openPurchaseModal(app) {
     currentApp = app;
     document.getElementById('modalAppName').textContent = app.name;
     document.getElementById('modalAppImage').src = app.img;
-    document.getElementById('userId').value = ''; // مسح حقل الإيدي
-    document.getElementById('quantity').value = ''; // مسح حقل الكمية
+    document.getElementById('userId').value = ''; 
+    document.getElementById('quantity').value = ''; 
+    
+    // تغيير placeholder الكمية ليوضح الوحدة
+    document.getElementById('quantity').placeholder = `أدخل الكمية المطلوبة (${app.unitName}، الحد الأدنى: ${app.minQuantity})`;
 
     // ربط حقل الكمية النصي بتحديث السعر فوراً عند الكتابة
     document.getElementById('quantity').oninput = updatePriceDisplay;
     
-    // إعادة تعيين السعر الأولي
     priceDisplay.textContent = '0'; 
     modal.style.display = 'block';
 }
 
-// 4. تحديث عرض السعر بناءً على النص المدخل
+// 4. تحديث عرض السعر (منطق الحساب الجديد)
 function updatePriceDisplay() {
-    const quantityText = document.getElementById('quantity').value.trim();
-    let price = '0';
+    // إزالة أي نص غير رقمي والسماح فقط للأرقام
+    const quantityValue = parseFloat(document.getElementById('quantity').value.replace(/[^0-9.]/g, ''));
     
-    // البحث عن الكمية المدخلة (يجب أن تتطابق تماماً مع مفاتيح الأسعار في appsData)
-    if (currentApp && quantityText) {
-        if (currentApp.prices.hasOwnProperty(quantityText)) {
-            price = currentApp.prices[quantityText];
-        } else {
-             // إذا لم يحدث تطابق (مثل "1000" بدلاً من "1000 كوينز")، يبقى السعر صفر
-        }
+    let price = 0;
+    
+    if (currentApp && !isNaN(quantityValue) && quantityValue > 0) {
+        // formula: Price = (Input Quantity / 1000) * Price Per 1000
+        price = (quantityValue / 1000) * currentApp.pricePer1000;
+        
+        // عرض السعر مع تقريب لأقرب سنتين
+        priceDisplay.textContent = price.toFixed(2);
+        return;
     }
     
-    priceDisplay.textContent = price;
+    priceDisplay.textContent = '0';
 }
 
 // 5. إغلاق النافذة
@@ -80,30 +85,36 @@ window.onclick = function(event) {
     }
 }
 
-// 6. وظيفة إتمام الطلب
+// 6. وظيفة إتمام الطلب (مع فحص الحد الأدنى)
 function completePurchase() {
     const userId = document.getElementById('userId').value;
-    const quantityText = document.getElementById('quantity').value.trim(); // النص المدخل
+    const quantityText = document.getElementById('quantity').value;
+    const quantityValue = parseFloat(quantityText.replace(/[^0-9.]/g, '')); // القيمة الرقمية المدخلة
     
-    let price = '0';
-    if (currentApp && currentApp.prices.hasOwnProperty(quantityText)) {
-        price = currentApp.prices[quantityText];
-    }
+    const minQ = currentApp.minQuantity;
 
-    if (!userId || price === '0' || !quantityText) {
-        alert("الرجاء إدخال إيدي المستخدم والكمية بشكل صحيح لتحديد السعر. تأكد من كتابة الكمية مع الوحدة (مثال: 1000 كوينز).");
+    if (!userId) {
+        alert("الرجاء إدخال إيدي المستخدم.");
         return;
     }
+
+    if (isNaN(quantityValue) || quantityValue < minQ) {
+        alert(`الرجاء إدخال كمية صحيحة، الحد الأدنى هو ${minQ} ${currentApp.unitName}.`);
+        return;
+    }
+    
+    // إعادة حساب السعر النهائي للتأكد
+    const finalPrice = ((quantityValue / 1000) * currentApp.pricePer1000).toFixed(2);
 
     // هنا يمكنك إضافة كود إرسال بيانات الشراء
     const message = `
         تم طلب الشحن بنجاح!
         التطبيق: ${currentApp.name}
         إيدي المستخدم: ${userId}
-        الكمية: ${quantityText}
-        السعر الإجمالي: ${price}$
+        الكمية: ${quantityValue} ${currentApp.unitName}
+        السعر الإجمالي: ${finalPrice}$
     `;
 
-    alert(message); // لعرض رسالة تأكيد بسيطة
-    modal.style.display = 'none'; // إغلاق النافذة بعد الطلب
+    alert(message); 
+    modal.style.display = 'none'; 
 }
